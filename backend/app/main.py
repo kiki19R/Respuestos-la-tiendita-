@@ -1,10 +1,11 @@
-"""Aplicación principal FastAPI"""
+"""Aplicación principal FastAPI actualizada"""
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
 from app.core.logging import app_logger
+from app.api.v1.router import api_router
 
 config = get_settings()
 
@@ -27,6 +28,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Incluir routers
+app.include_router(api_router)
+
 
 # Rutas de health check
 @app.get("/health", tags=["Health"])
@@ -35,13 +39,21 @@ async def health_check():
     return {"status": "healthy", "version": config.app_version}
 
 
-@app.get("/api", tags=["Info"])
+@app.get("/", tags=["Info"])
 async def api_info():
     """Información de la API"""
     return {
         "name": config.app_name,
         "version": config.app_version,
         "docs": "/api/docs",
+        "endpoints": [
+            "/api/v1/auth/login",
+            "/api/v1/auth/registro",
+            "/api/v1/clientes",
+            "/api/v1/productos",
+            "/api/v1/inventario",
+            "/api/v1/proveedores",
+        ]
     }
 
 
