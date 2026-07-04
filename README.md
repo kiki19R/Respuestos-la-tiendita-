@@ -1,214 +1,258 @@
-# 🚗 Sistema de Facturación y Gestión - Respuestos La Tiendita
+# 🚗 Respuestos La Tiendita - Sistema ERP Profesional
 
-Sistema completo de gestión para la tienda **Respuestos La Tiendita** con funcionalidades de:
-- 📋 Inventario
-- 💰 Ventas y Facturas
-- 📦 Compras
-- 👥 Gestión de Clientes
-- 🏭 Gestión de Proveedores
-- 📊 Reportes y Estadísticas
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![React 18+](https://img.shields.io/badge/react-18+-61dafb.svg)](https://react.dev/)
+[![PostgreSQL 16](https://img.shields.io/badge/postgresql-16-336791.svg)](https://www.postgresql.org/)
 
-## ✨ Características Principales
+> Sistema ERP completo, profesional y escalable para la gestión de tiendas de repuestos.
 
-✅ **Gestión de Productos**
-- Registro de productos con código, nombre, precios
-- Asociación con proveedores
-- Actualización de precios
+## ✨ Características
 
-✅ **Control de Inventario**
-- Seguimiento en tiempo real del stock
-- Alertas de stock bajo
-- Historial de movimientos
-- Valor total del inventario
+### 🔐 Seguridad
+- ✅ Autenticación JWT con tokens de acceso y refresco
+- ✅ Contraseñas hasheadas con Bcrypt
+- ✅ Control de roles (admin, gerente, vendedor)
+- ✅ Rate limiting y validación de entrada
+- ✅ Logging de auditoría completo
 
-✅ **Gestión de Ventas**
-- Generación de facturas en PDF profesionales
-- Cálculo automático de totales y cambio
-- Aplicación de descuentos por producto
-- Registro de todas las ventas
+### 📊 Gestión de Inventario
+- ✅ Control de stock en tiempo real
+- ✅ Alertas de stock bajo
+- ✅ Historial de movimientos de inventario
+- ✅ Cálculo de valor total del inventario
+- ✅ Búsqueda avanzada de productos
 
-✅ **Gestión de Compras**
-- Registro de compras a proveedores
-- Actualización automática de inventario
-- Seguimiento de compras pendientes
+### 💰 Gestión de Ventas
+- ✅ Facturación electrónica profesional
+- ✅ Cálculo automático de totales y cambio
+- ✅ Descuentos por producto
+- ✅ Múltiples formas de pago
+- ✅ Generación de PDF
 
-✅ **Gestión de Clientes**
-- Registro de información de clientes
-- Historial de compras
+### 📦 Gestión de Compras
+- ✅ Registro de compras a proveedores
+- ✅ Actualización automática de inventario
+- ✅ Seguimiento de compras pendientes
+- ✅ Historial completo de transacciones
 
-✅ **Gestión de Proveedores**
-- Base de datos de proveedores
-- Contacto y detalles de proveedores
+### 👥 Gestión de Clientes y Proveedores
+- ✅ Base de datos de clientes y proveedores
+- ✅ Información de contacto detallada
+- ✅ Historial de transacciones
+- ✅ Búsqueda y filtrado
 
-✅ **Reportes**
-- Ventas del mes
-- Compras del mes
-- Productos con stock bajo
-- Valor total del inventario
+### 📈 Reportes y Estadísticas
+- ✅ Ventas por período
+- ✅ Compras por período
+- ✅ Productos con stock bajo
+- ✅ Valor total del inventario
+- ✅ Gráficos interactivos
 
-## 📋 Requisitos
+### 🎨 Interfaz Moderna
+- ✅ Diseño responsive con Tailwind CSS
+- ✅ Componentes reutilizables
+- ✅ Validaciones en tiempo real
+- ✅ Interfaz intuitiva y fácil de usar
 
-- Python 3.7+
-- SQLite3 (incluido en Python)
-- Librerías adicionales (ver `requirements.txt`)
+---
 
-## 🚀 Instalación Rápida
+## 🏗️ Arquitectura
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                     FRONTEND (React)                     │
+│  - TypeScript, Vite, Tailwind CSS                       │
+│  - React Router, React Query, Zustand                   │
+│  - Componentes reutilizables, Validaciones con Zod      │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+                  ↓ HTTP/REST
+┌─────────────────────────────────────────────────────────┐
+│                   API REST (FastAPI)                     │
+│  - Python 3.11, FastAPI, Uvicorn                        │
+│  - JWT Authentication, CORS, Rate Limiting              │
+│  - Endpoints: Auth, Clientes, Productos, Inventario     │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+                  ↓ SQL
+┌─────────────────────────────────────────────────────────┐
+│                  DATABASE (PostgreSQL)                   │
+│  - PostgreSQL 16, SQLAlchemy ORM                        │
+│  - 10 tablas relacionadas, Índices optimizados          │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│              INFRASTRUCTURE (Docker)                     │
+│  - Docker Compose con 6 servicios                       │
+│  - Postgres, Backend, Frontend, pgAdmin, Redis          │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🚀 Inicio Rápido
+
+### Con Docker (Recomendado)
 
 ```bash
-# 1. Clonar el repositorio
+# 1. Clonar repositorio
 git clone https://github.com/kiki19R/Respuestos-la-tiendita-.git
 cd Respuestos-la-tiendita-
 
-# 2. Instalar dependencias
-pip install -r requirements.txt
+# 2. Configurar variables de entorno
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
 
-# 3. Ejecutar el sistema
-python main.py
+# 3. Iniciar servicios
+docker-compose up -d
+
+# 4. Crear usuario admin (ver SETUP.md para detalles)
+
+# 5. Acceder
+# Frontend: http://localhost:3000
+# Backend: http://localhost:8000
+# API Docs: http://localhost:8000/api/docs
 ```
 
-## 🎯 Uso
+### Localmente (Sin Docker)
 
-### Ejecutar el Sistema
+Ver [SETUP.md](./SETUP.md) para instrucciones detalladas.
 
-```bash
-python main.py
-```
+---
 
-Esto abrirá un menú interactivo donde podrás:
-- 1️⃣ Gestionar clientes
-- 2️⃣ Gestionar proveedores
-- 3️⃣ Crear y actualizar productos
-- 4️⃣ Controlar inventario
-- 5️⃣ Realizar ventas y generar facturas
-- 6️⃣ Realizar compras
-- 7️⃣ Ver reportes
-- 8️⃣ Salir
-
-## 📁 Estructura de Archivos
+## 📁 Estructura del Proyecto
 
 ```
 Responuestos-la-tiendita-/
-├── main.py                    # CLI interactivo principal
-├── database.py                # Módulo de base de datos
-├── invoice_generator.py       # Generador de facturas PDF
-├── config.py                  # Configuración del sistema
-├── requirements.txt           # Dependencias Python
-├── tienda_respuestos.db       # Base de datos (se crea automáticamente)
-├── logo.png                   # Logo de la tienda (opcional)
-└── README.md                  # Este archivo
+├── backend/                          # FastAPI Backend
+│   ├── app/
+│   │   ├── api/                     # Endpoints REST
+│   │   ├── core/                    # Seguridad, excepciones, logging
+│   │   ├── models/                  # Modelos SQLAlchemy
+│   │   ├── schemas/                 # Schemas Pydantic
+│   │   ├── services/                # Lógica de negocio
+│   │   ├── repositories/            # Acceso a datos
+│   │   └── main.py                  # Aplicación principal
+│   ├── tests/                       # Tests unitarios e integración
+│   ├── requirements.txt             # Dependencias Python
+│   ├── Dockerfile                   # Build backend
+│   └── docker-compose.yml           # Orquestación de servicios
+│
+├── frontend/                         # React + TypeScript
+│   ├── src/
+│   │   ├── components/              # Componentes reutilizables
+│   │   ├── pages/                   # Páginas
+│   │   ├── services/                # Clientes API
+│   │   ├── store/                   # Estado global (Zustand)
+│   │   ├── schemas/                 # Validaciones (Zod)
+│   │   ├── types/                   # Tipos TypeScript
+│   │   └── App.tsx                  # Componente principal
+│   ├── package.json                 # Dependencias Node
+│   ├── vite.config.ts               # Configuración Vite
+│   ├── tailwind.config.js           # Configuración Tailwind
+│   ├── Dockerfile                   # Build frontend
+│   └── .env.example                 # Variables de entorno
+│
+├── docker-compose.yml               # Orquestación completa
+├── SETUP.md                         # Guía de instalación
+├── README.md                        # Este archivo
+└── docs/                            # Documentación adicional
 ```
 
-## 💻 Ejemplo de Código
+---
 
-```python
-from database import GestorProductos, GestorInventario
+## 🔑 Credenciales de Prueba
 
-# Crear un producto
-gestor = GestorProductos()
-gestor.agregar(
-    codigo="E787",
-    nombre="Tdel volante superior",
-    precio_venta=1.39
-)
+| Campo | Valor |
+|-------|-------|
+| Email | admin@example.com |
+| Contraseña | admin123456 |
+| Rol | admin |
 
-# Obtener inventario
-gestor_inv = GestorInventario()
-inventario = gestor_inv.obtener_inventario()
-print(f"Valor total: ${gestor_inv.obtener_valor_total():.2f}")
-```
+**Nota:** Cambiar credenciales en producción.
 
-## ⚙️ Configuración
+---
 
-Edita `config.py`:
+## 📚 Documentación
 
-```python
-TIENDA = {
-    'nombre': 'Respuestos La Tiendita',
-    'rif': 'J-12345678-9',
-    'telefono': '5353264910',
-    'email': 'respuestoslatiendieta@gmail.com',
-    'logo_path': 'logo.png'
-}
-```
+- [Guía de Instalación](./SETUP.md)
+- [Documentación de API](./docs/API.md) (próximamente)
+- [Arquitectura del Sistema](./docs/ARCHITECTURE.md) (próximamente)
+- [Guía de Deployment](./docs/DEPLOYMENT.md) (próximamente)
 
-## 🗄️ Base de Datos
+---
 
-SQLite con las siguientes tablas:
-- **clientes** - Información de clientes
-- **proveedores** - Información de proveedores
-- **productos** - Catálogo de productos
-- **inventario** - Stock y ubicación
-- **ventas** - Registro de ventas
-- **compras** - Registro de compras
-- **movimientos_inventario** - Historial de cambios
+## 🛠️ Stack Tecnológico
 
-## 📊 Funcionalidades
+### Backend
+- **FastAPI** - Framework web moderno y rápido
+- **SQLAlchemy** - ORM robusto para Python
+- **PostgreSQL** - Base de datos confiable
+- **Alembic** - Migraciones de BD
+- **Pytest** - Testing
 
-### Gestión de Productos
-✅ Crear productos con código único
-✅ Establecer precios de compra y venta
-✅ Asociar con proveedores
-✅ Actualizar precios dinámicamente
+### Frontend
+- **React 18** - Biblioteca UI
+- **TypeScript** - Seguridad de tipos
+- **Vite** - Build tool rápido
+- **Tailwind CSS** - Estilos
+- **React Query** - Manejo de datos
+- **Zustand** - Estado global
+- **React Hook Form** - Gestión de formularios
+- **Zod** - Validaciones
 
-### Control de Inventario
-✅ Registrar cantidad de stock
-✅ Alertas de stock bajo
-✅ Historial de movimientos
-✅ Cálculo de valor total
+### DevOps
+- **Docker** - Containerización
+- **Docker Compose** - Orquestación
+- **PostgreSQL 16** - Base de datos
+- **Redis** - Caching (opcional)
 
-### Ventas
-✅ Crear facturas profesionales en PDF
-✅ Aplicar descuentos por producto
-✅ Calcular cambio automáticamente
-✅ Actualizar inventario al vender
-✅ Registrar cliente (opcional)
+---
 
-### Compras
-✅ Registrar compras a proveedores
-✅ Actualizar inventario automáticamente
-✅ Calcular totales
-✅ Historial de compras
+## 🌟 Características Futuras
 
-### Reportes
-✅ Ventas del mes
-✅ Compras del mes
-✅ Productos con stock bajo
-✅ Valor total del inventario
+- [ ] Integración con múltiples sucursales
+- [ ] Punto de venta (POS) integrado
+- [ ] App móvil nativa
+- [ ] Integración con plataformas de pago
+- [ ] Sistema de notificaciones por email/SMS
+- [ ] Soporte multimoneda
+- [ ] Análisis con IA/ML
+- [ ] API pública para integraciones
 
-## 🐛 Solución de Problemas
+---
 
-### Error: ModuleNotFoundError
-```bash
-pip install -r requirements.txt
-```
+## 🤝 Contribuir
 
-### Base de datos bloqueada
-```bash
-rm tienda_respuestos.db
-python main.py
-```
+Los pull requests son bienvenidos. Para cambios importantes, abre primero un issue para discutir los cambios propuestos.
 
-### Las facturas no se generan
-- Verifica permisos de escritura
-- Instala reportlab: `pip install reportlab`
-
-## 📝 Notas
-
-- Las facturas se guardan como PDF en el directorio actual
-- El inventario se actualiza automáticamente al realizar ventas
-- Todos los precios están en USD
-- La base de datos se crea automáticamente en la primera ejecución
-
-## 📞 Soporte
-
-Para reportar problemas, abre un **issue** en el repositorio.
+---
 
 ## 📄 Licencia
 
-Uso interno para Respuestos La Tiendita.
+Este proyecto está bajo licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
+
+---
+
+## 👨‍💻 Autor
+
+**kiki19R** - [GitHub](https://github.com/kiki19R)
+
+---
+
+## 📞 Soporte
+
+Para reportar bugs o solicitar features, abre un [GitHub Issue](https://github.com/kiki19R/Respuestos-la-tiendita-/issues).
+
+---
+
+## 🙏 Agradecimientos
+
+Gracias a todos los que contribuyen al desarrollo de este proyecto.
 
 ---
 
 **Hecho con ❤️ para Respuestos La Tiendita**
 
-**Última actualización**: Julio 2026
+*Última actualización: Julio 2026*
